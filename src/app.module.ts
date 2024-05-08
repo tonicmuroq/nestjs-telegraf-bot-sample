@@ -9,7 +9,7 @@ import { PhotoModule } from 'photo/photo.module';
     TelegrafModule.forRoot({
       botName: 'echo',
       token: process.env.ECHO_BOT_TOKEN,
-      include: [PhotoModule, EchoModule],
+      include: [EchoModule, PhotoModule],
     }),
 
     TelegrafModule.forRoot({

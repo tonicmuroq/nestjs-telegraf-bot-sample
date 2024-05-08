@@ -1,6 +1,6 @@
 import { Scene, SceneEnter, SceneLeave, Command } from 'nestjs-telegraf';
 import { HELLO_SCENE_ID } from '../../app.constants';
-import { Context } from '../../interfaces/context.interface';
+import { SceneContext } from 'telegraf/scenes';
 
 @Scene(HELLO_SCENE_ID)
 export class RandomNumberScene {
@@ -24,7 +24,7 @@ export class RandomNumberScene {
   }
 
   @Command('leave')
-  async onLeaveCommand(ctx: Context): Promise<void> {
+  async onLeaveCommand(ctx: SceneContext): Promise<void> {
     await ctx.scene.leave();
   }
 

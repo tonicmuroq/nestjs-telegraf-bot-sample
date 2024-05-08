@@ -1,6 +1,6 @@
 import { Command, Ctx, Hears, Start, Update, Sender } from 'nestjs-telegraf';
+import { SceneContext } from 'telegraf/scenes';
 import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
-import { Context } from '../interfaces/context.interface';
 import { HELLO_SCENE_ID, WIZARD_SCENE_ID } from '../app.constants';
 import { UpdateType } from '../common/decorators/update-type.decorator';
 
@@ -16,20 +16,19 @@ export class GreeterUpdate {
   onGreetings(
     @UpdateType() updateType: TelegrafUpdateType,
     @Sender('first_name') firstName: string,
-    @Ctx() ctx: Context,
+    @Ctx() ctx: SceneContext,
   ): string {
     return `Hey ${firstName}, you sent me "${ctx.text}", update type is ${updateType}`;
   }
 
   @Command('scene')
-  async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
-    console.log('onSceneCommand', ctx);
-    await ctx.scene.enter(HELLO_SCENE_ID);
+  onSceneCommand(@Ctx() ctx: SceneContext): void {
+    ctx.scene.enter(HELLO_SCENE_ID);
   }
 
   @Command('wizard')
-  async onWizardCommand(@Ctx() ctx: Context): Promise<void> {
-    await ctx.scene.enter(WIZARD_SCENE_ID);
+  onWizardCommand(@Ctx() ctx: SceneContext): void {
+    ctx.scene.enter(WIZARD_SCENE_ID);
   }
 
 }

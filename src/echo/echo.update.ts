@@ -9,9 +9,8 @@ import {
   Command,
   Ctx,
 } from 'nestjs-telegraf';
-import { Telegraf } from 'telegraf';
+import { Telegraf, Context } from 'telegraf';
 import { EchoService } from './echo.service';
-import { Context } from '../interfaces/context.interface';
 import { ReverseTextPipe } from '../common/pipes/reverse-text.pipe';
 import { ResponseTimeInterceptor } from '../common/interceptors/response-time.interceptor';
 import { AdminGuard } from '../common/guards/admin.guard';
@@ -24,7 +23,7 @@ export class EchoUpdate {
 
   constructor(
     @InjectBot('echo')
-    private readonly bot: Telegraf<Context>,
+    private readonly bot: Telegraf,
     private readonly echoService: EchoService,
   ) { }
 
